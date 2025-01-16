@@ -1,9 +1,20 @@
-import React from 'react'
+import { Form, Input, Modal, Select, Button, Card, Table } from "antd";
 
-const PrintBill = () => {
+const PrintBill = ({ isModalOpen, setIsModalOpen }) => {
+  const onFinish = (values) => {
+    console.log("Received values of form: ", values);
+  };
+
   return (
-    <div>PrintBill</div>
-  )
-}
+    <Modal
+      title="Fatura Yazdır"
+      open={isModalOpen}
+      footer={false}
+      onCancel={() => setIsModalOpen(false)}
+    >
+      Fatura
+    </Modal>
+  );
+};
 
-export default PrintBill
+export default PrintBill;
