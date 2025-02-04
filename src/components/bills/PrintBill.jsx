@@ -1,18 +1,134 @@
-import { Form, Input, Modal, Select, Button, Card, Table } from "antd";
+import { Modal } from "antd";
 
 const PrintBill = ({ isModalOpen, setIsModalOpen }) => {
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-  };
-
   return (
     <Modal
       title="Fatura Yazdır"
       open={isModalOpen}
       footer={false}
       onCancel={() => setIsModalOpen(false)}
+      width={800}
     >
-      Fatura
+      <section className="py-20 bg-black">
+        <div className="max-w-5xl mx-auto bg-white px-6">
+          <article className="overflow-hidden">
+            <div className="logo my-6">
+              <h2 className="text-4xl font-bold text-slate-700">LOGO</h2>
+            </div>
+            <div className="bill-details">
+              <div className="grid grid-cols-4 gap-12">
+                <div className="text-md text-slate-500">
+                  <p className="font-bold text-slate-700">Fatura Detayı:</p>
+                  Unwrapped
+                  <p>Fake Street 123</p>
+                  <p>San Javier</p>
+                  <p>CA 1234</p>
+                </div>
+                <div className="text-md text-slate-500">
+                  <p className="font-bold text-slate-700">Fatura:</p>
+                  The Boring Company
+                  <p>Tesla Street 007</p>
+                  <p>Frisco</p>
+                  <p>CA 0000</p>
+                </div>
+                <div className="text-md text-slate-500">
+                  <div>
+                    <p className="font-bold text-slate-700">Fatura numarası:</p>
+                    <p>00041</p>
+                  </div>
+                  <div>
+                    <p className="font-bold text-slate-700 mt-2">
+                      Veriliş Tarihi:
+                    </p>
+                    <p>00041</p>
+                  </div>
+                </div>
+                <div className="text-md text-slate-500">
+                  <div>
+                    <p className="font-bold text-slate-700">Şartlar:</p>
+                    <p>10 gün</p>
+                  </div>
+                  <div>
+                    <p className="font-bold text-slate-700 mt-2">Vade:</p>
+                    <p>2000-01-01</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="bill-table-area mt-8">
+              <table className="min-w-full divide-y divide-slate-500 overflow-hidden">
+                <thead>
+                  <tr>
+                    <th
+                      scope="col"
+                      className="py-3.5 pl-4 text-left text-sm font-normal text-slate-700 sm:pl-6 md:pl-0 sm:table-cell hidden"
+                    >
+                      Görsel
+                    </th>
+                    <th
+                      scope="col"
+                      className="py-3.5 pl-4 text-left text-sm font-normal text-slate-700 sm:pl-6 md:pl-0 sm:table-cell hidden"
+                    >
+                      Başlık
+                    </th>
+                    <th
+                      scope="col"
+                      className="py-3.5 pl-4 text-center text-sm font-normal text-slate-700 sm:pl-6 md:pl-0 sm:table-cell hidden"
+                    >
+                      Fiyat
+                    </th>
+                    <th
+                      scope="col"
+                      className="py-3.5 pl-4 text-center text-sm font-normal text-slate-700 sm:pl-6 md:pl-0 sm:table-cell hidden"
+                    >
+                      Adet
+                    </th>
+                    <th
+                      scope="col"
+                      className="py-3.5 pl-4 text-end text-sm font-normal text-slate-700 sm:pl-6 md:pl-0 sm:table-cell hidden"
+                    >
+                      Toplam
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="py-4 pr-3">
+                      <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8fYfP1KwUDZt1Ta_lcPqiyHKScAXFOkdub8JqAfO-S4oek5MJJQmKS9Mh5bIV0uWrM9M&usqp=CAU"
+                        alt=""
+                        className="w-12 h-12 object-contain"
+                      />
+                    </td>
+                    <td className="py-4 pr-3">
+                      <span className="font-medium">Şalgam</span>
+                    </td>
+                    <td className="py-4 pr-3 text-center">
+                      <span>5 ₺</span>
+                    </td>
+                    <td className="py-4 pr-3 text-center">
+                      <span>1</span>
+                    </td>
+                    <td className="py-4 pr-3 text-end">
+                      <span>5.00₺</span>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th className="text-right pt-6" colSpan="4" scope="row">
+                      Ara Toplam
+                    </th>
+                    <th className="text-right pt-6" scope="row">
+                      Ara Toplam
+                    </th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </article>
+        </div>
+      </section>
     </Modal>
   );
 };
