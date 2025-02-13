@@ -1,4 +1,4 @@
-import { Modal } from "antd";
+import { Button, Modal } from "antd";
 
 const PrintBill = ({ isModalOpen, setIsModalOpen }) => {
   return (
@@ -16,7 +16,7 @@ const PrintBill = ({ isModalOpen, setIsModalOpen }) => {
               <h2 className="text-4xl font-bold text-slate-700">LOGO</h2>
             </div>
             <div className="bill-details">
-              <div className="grid grid-cols-4 gap-12">
+              <div className="grid sm:grid-cols-4 grid-cols-3  gap-12">
                 <div className="text-md text-slate-500">
                   <p className="font-bold text-slate-700">Fatura Detayı:</p>
                   Unwrapped
@@ -43,7 +43,7 @@ const PrintBill = ({ isModalOpen, setIsModalOpen }) => {
                     <p>00041</p>
                   </div>
                 </div>
-                <div className="text-md text-slate-500">
+                <div className="text-md text-slate-500 sm:block hidden">
                   <div>
                     <p className="font-bold text-slate-700">Şartlar:</p>
                     <p>10 gün</p>
@@ -67,68 +67,147 @@ const PrintBill = ({ isModalOpen, setIsModalOpen }) => {
                     </th>
                     <th
                       scope="col"
-                      className="py-3.5 pl-4 text-left text-sm font-normal text-slate-700 sm:pl-6 md:pl-0 sm:table-cell hidden"
+                      className="py-3.5 text-left text-sm font-normal text-slate-700 md:pl-0 sm:table-cell hidden"
                     >
+                      {" "}
+                      Başlık
+                    </th>
+                    <th
+                      scope="col" colSpan={4}
+                      className="py-3.5 text-left text-sm font-normal text-slate-700 md:pl-0 sm:hidden"
+                    >
+                      {" "}
                       Başlık
                     </th>
                     <th
                       scope="col"
-                      className="py-3.5 pl-4 text-center text-sm font-normal text-slate-700 sm:pl-6 md:pl-0 sm:table-cell hidden"
+                      className="py-3.5 text-center text-sm font-normal text-slate-700 md:pl-0 sm:table-cell hidden"
                     >
                       Fiyat
                     </th>
                     <th
                       scope="col"
-                      className="py-3.5 pl-4 text-center text-sm font-normal text-slate-700 sm:pl-6 md:pl-0 sm:table-cell hidden"
+                      className="py-3.5 text-center text-sm font-normal text-slate-700 md:pl-0 sm:table-cell hidden"
                     >
                       Adet
                     </th>
                     <th
                       scope="col"
-                      className="py-3.5 pl-4 text-end text-sm font-normal text-slate-700 sm:pl-6 md:pl-0 sm:table-cell hidden"
+                      className="py-3.5 pl-4 text-end text-sm font-normal text-slate-700 sm:pl-6 md:pl-0"
                     >
                       Toplam
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td className="py-4 pr-3">
+                  <tr className="border-b border-slate-200">
+                    <td className="py-4 sm:table-cell hidden">
                       <img
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8fYfP1KwUDZt1Ta_lcPqiyHKScAXFOkdub8JqAfO-S4oek5MJJQmKS9Mh5bIV0uWrM9M&usqp=CAU"
                         alt=""
                         className="w-12 h-12 object-contain"
                       />
                     </td>
-                    <td className="py-4 pr-3">
-                      <span className="font-medium">Şalgam</span>
+                    <td className="py-4 sm:table-cell hidden">
+                      <div className="flex flex-col">
+                        <span className="font-medium">Şalgam</span>
+                        <span className="sm:hidden inline-block text-xs">Birim Fiyat 5₺</span>
+
+                      </div>
+                      
                     </td>
-                    <td className="py-4 pr-3 text-center">
+                    <td className="py-4 sm:hidden" colSpan={4}>
+                      <div className="flex flex-col">
+                        <span className="font-medium">Şalgam</span>
+                        <span className="sm:hidden inline-block text-xs">Birim Fiyat 5₺</span>
+
+                      </div>
+                      
+                    </td>
+                    <td className="py-4 text-center sm:table-cell hidden">
                       <span>5 ₺</span>
                     </td>
-                    <td className="py-4 pr-3 text-center">
+                    <td className="py-4 text-center sm:table-cell hidden">
                       <span>1</span>
                     </td>
-                    <td className="py-4 pr-3 text-end">
+                    <td className="py-4 text-end">
                       <span>5.00₺</span>
                     </td>
                   </tr>
+                  
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th className="text-right pt-6" colSpan="4" scope="row">
-                      Ara Toplam
+                    <th className="text-right pt-6 sm:table-cell hidden" colSpan="4" scope="row">
+                      <span className="font-normal text-slate-700">
+                        Ara Toplam
+                      </span>
                     </th>
-                    <th className="text-right pt-6" scope="row">
-                      Ara Toplam
+                    <th className="text-left pt-6 sm:hidden" colSpan="4" scope="row">
+                      <p className="font-normal text-slate-700">
+                        Ara Toplam
+                      </p>
+                    </th>
+                    <th className="text-right pt-4" scope="row">
+                      <span className="font-normal text-slate-700">61₺</span>
+                    </th>
+                  </tr>
+                  <tr>
+                  <th className="text-right pt-6 sm:table-cell hidden" colSpan="4" scope="row">
+                      <span className="font-normal text-slate-700">
+                        KDV
+                      </span>
+                    </th>
+                    <th className="text-left pt-6 sm:hidden" colSpan="4" scope="row">
+                      <p className="font-normal text-slate-700">
+                        KDV
+                      </p>
+                    </th>
+                    <th className="text-right pt-4" scope="row">
+                      <span className="font-normal text-red-700">+4.88₺</span>
+                    </th>
+                  </tr>
+                  <tr>
+                  <th className="text-right pt-6 sm:table-cell hidden" colSpan="4" scope="row">
+                      <span className="font-normal text-slate-700">
+                        Total
+                      </span>
+                    </th>
+                    <th className="text-left pt-6 sm:hidden" colSpan="4" scope="row">
+                      <p className="font-normal text-slate-700">
+                        Total
+                      </p>
+                    </th>
+                    <th className="text-right pt-4" scope="row">
+                      <span className="font-normal text-slate-700">65.88₺</span>
                     </th>
                   </tr>
                 </tfoot>
               </table>
+              <div className="py-9">
+                <div className="border-t pt-9 border-slate-300">
+                  <p className="text-sm font-light text-slate-700">
+                    Ödeme koşulları 14 gündür. Paketlenmemiş Borçların Geç
+                    Ödenmesi Yasası 0000'e göre, serbest çalışanların bu süreden
+                    sonra borçların ödenmemesi durumunda 00.00 gecikme ücreti
+                    talep etme hakkına sahip olduklarını ve bu noktada bu ücrete
+                    ek olarak yeni bir fatura sunulacağını lütfen unutmayın.
+                    Revize faturanın 14 gün içinde ödenmemesi durumunda, vadesi
+                    geçmiş hesaba ek faiz ve %8 yasal oran artı %0,5 Bank of
+                    England tabanı olmak üzere toplam %8,5 uygulanacaktır.
+                    Taraflar Kanun hükümleri dışında sözleşme yapamazlar.
+                  </p>
+                </div>
+              </div>
             </div>
           </article>
         </div>
       </section>
+      <div className="flex justify-end mt-4">
+        <Button type="primary" size="large">
+          Yazdır
+        </Button>
+      </div>
     </Modal>
   );
 };
