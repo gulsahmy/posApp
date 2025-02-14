@@ -1,4 +1,4 @@
-import { Form, Input, Modal, Select, Button, Card, Table } from "antd";
+import { Form, Input, Modal, Select, Button, Card } from "antd";
 
 const CreateBill = ({ isModalOpen, setIsModalOpen }) => {
   const onFinish = (values) => {
