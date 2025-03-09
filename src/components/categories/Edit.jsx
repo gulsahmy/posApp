@@ -22,12 +22,29 @@ const Edit = ({
           if (item._id === editingRow._id) {
             return { ...item, title: values.title };
           }
-          return item
+          return item;
         })
       );
     } catch (error) {
-      message.success("Bir şeyler yanlış gitti.");
+      message.error("Bir şeyler yanlış gitti.");
       console.log(error);
+    }
+  };
+
+  const deleteCategory = (id) => {
+    if (window.confirm("Emin misiniz?")) {
+      try {
+        fetch("http://localhost:5000/api/categories/delete-category", {
+          method: "DELETE",
+          body: JSON.stringify({ categoryId: id }),
+          headers: { "Content-type": "application/json; charset=UTF-8" },
+        });
+        message.success("Kategori başarıyla silindi.");
+        setCategories(categories.filter((item) => item._id !== id));
+      } catch (error) {
+        message.error("Bir şeyler yanlış gitti.");
+        console.log(error);
+      }
     }
   };
 
@@ -50,16 +67,29 @@ const Edit = ({
     {
       title: "Action",
       dataIndex: "action",
-      render: (text, record) => {
+      render: (_, record) => {
         return (
           <div>
-            <Button type="link" onClick={() => setEditingRow(record)} className="pl-0">
+            <Button
+              type="link"
+              onClick={() => setEditingRow(record)}
+              className="pl-0"
+            >
               Düzenle
             </Button>
-            <Button type="link" secondary htmlType="submit" className="text-gray-600">
+            <Button
+              type="link"
+              secondary
+              htmlType="submit"
+              className="text-gray-600"
+            >
               Kaydet
             </Button>
-            <Button type="link" danger>
+            <Button
+              type="link"
+              danger
+              onClick={() => deleteCategory(record._id)}
+            >
               Sil
             </Button>
           </div>
