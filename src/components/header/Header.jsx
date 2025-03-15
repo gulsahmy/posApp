@@ -40,7 +40,7 @@ const Header = () => {
           </Link>
           <Badge
             count={cart.cartItems.length}
-            offset={[0, 6]}
+            offset={[0, 0]}
             className="md:flex hidden"
           >
             <Link
@@ -80,7 +80,7 @@ const Header = () => {
             <span className="md:text-xs text-[10px]">Çıkış</span>
           </Link>
         </div>
-        <Badge count={5} offset={[0, 6]} className="md:hidden flex">
+        <Badge count={5} offset={[0, 0]} className="md:hidden flex">
           <Link
             to={"/"}
             className="menu-link flex flex-col hover:text-[#40a9ff] transition-all"

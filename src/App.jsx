@@ -8,6 +8,7 @@ import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
 import ProductPage from "./pages/ProductPage";
 
+
 function App() { 
   return (
     <BrowserRouter>
