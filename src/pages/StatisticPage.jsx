@@ -1,145 +1,121 @@
-//  import React from 'react';
-//  import Header from "../components/header/Header";
-//  import StatisticCard from "../components/statistics/StatisticCard";
-
-// const StatisticPage = () => {
-
-//   return (
-//     <>
-//       <Header />
-//       <div className="px-6">
-//         <h1 className="text-4xl font-bold text-center mb-4">İstatistiklerim</h1>
-//         <div className="statistic-section">
-//           <h2 className="text-lg">
-//             Hoş geldin{" "}
-//             <span className="text-green-700 font-bold text-xl">admin.</span>
-//           </h2>
-//           <div className="statistic-cards grid xl:grid-cols-4 md:grid-cols-2 my-10 md:gap-10 gap-4">
-//             <StatisticCard
-//               title={"Toplam Müşteri"}
-//               amount={"10"}
-//               img={"images/user.png"}
-//             />
-//             <StatisticCard
-//               title={"Toplam Kazanç"}
-//               amount={"660.96"}
-//               img={"images/money.png"}
-//             />
-//             <StatisticCard
-//               title={"Toplam Satış"}
-//               amount={"6"}
-//               img={"images/sale.png"}
-//             />
-//             <StatisticCard
-//               title={"Toplam Ürün"}
-//               amount={"28"}
-//               img={"images/product.png"}
-//             />
-//           </div>
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
-
-// export default StatisticPage;
-
-import React from "react";
-import Header from "../components/header/Header";
-import StatisticCard from "../components/statistics/StatisticCard";
+import { useEffect, useState } from "react";
+import Header from "../components/header/Header.jsx";
+import StatisticCard from "../components/statistics/StatisticCard.jsx";
 import { Area, Pie } from "@ant-design/plots";
 
 const StatisticPage = () => {
+  const [data, setData] = useState([]);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    asyncFetch();
+  }, []);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/products/get-all");
+        const data = await res.json();
+        setProducts(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getProducts();
+  }, []);
+
+  const asyncFetch = () => {
+    fetch("http://localhost:5000/api/bills/get-all")
+      .then((response) => response.json())
+      .then((json) => setData(json))
+      .catch((error) => {
+        console.log("fetch data failed", error);
+      });
+  };
+
   const config = {
-    data: {
-      type: "fetch",
-      value: "https://assets.antv.antgroup.com/g2/aapl.json",
+    data,
+    xField: "customerName",
+    yField: "subTotal",
+    xAxis: {
+      range: [0, 1],
     },
-    xField: (d) => new Date(d.date),
-    yField: "close",
   };
 
   const config2 = {
-    data: [
-      { type: "分类一", value: 27 },
-      { type: "分类二", value: 25 },
-      { type: "分类三", value: 18 },
-      { type: "分类四", value: 15 },
-      { type: "分类五", value: 10 },
-      { type: "其他", value: 5 },
-    ],
-    angleField: "value",
-    colorField: "type",
+    appendPadding: 10,
+    data,
+    angleField: "subTotal",
+    colorField: "customerName",
+    radius: 1,
     innerRadius: 0.6,
     label: {
-      text: "value",
+      type: "inner",
+      offset: "-50%",
+      content: "{value}",
       style: {
-        fontWeight: "bold",
+        textAlign: "center",
+        fontSize: 14,
       },
     },
-    legend: {
-      color: {
-        title: false,
-        position: "right",
-        rowPadding: 5,
-      },
-    },
-    annotations: [
+    interactions: [
       {
-        type: "text",
-        style: {
-          text: "AntV\nCharts",
-          x: "50%",
-          y: "50%",
-          textAlign: "center",
-          fontSize: 40,
-          fontStyle: "bold",
-        },
+        type: "element-selected",
+      },
+      {
+        type: "element-active",
       },
     ],
+    statistic: {
+      title: false,
+      content: {
+        style: {
+          whiteSpace: "pre-wrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+        },
+        content: "Toplam\nDeğer",
+      },
+    },
+  };
+
+  const totalAmount = () => {
+    const amount = data.reduce((total, item) => item.totalAmount + total, 0);
+    return `${amount.toFixed(2)}₺`;
   };
 
   return (
     <>
       <Header />
-      <div className="px-6 md:pb-0 pb-20">
-        <h1 className="text-4xl font-bold text-center mb-4">İstatistiklerim</h1>
-        <div className="statistic-section">
-          <h2 className="text-lg">
-            Hoş geldin{" "}
-            <span className="text-green-700 font-bold text-xl">admin.</span>
-          </h2>
           <div className="statistic-cards grid xl:grid-cols-4 md:grid-cols-2 my-10 md:gap-10 gap-4">
-            <StatisticCard
-              title={"Toplam Müşteri"}
-              amount={"10"}
-              img={"images/user.png"}
-            />
-            <StatisticCard
-              title={"Toplam Kazanç"}
-              amount={"660.96"}
-              img={"images/money.png"}
-            />
-            <StatisticCard
-              title={"Toplam Satış"}
-              amount={"6"}
-              img={"images/sale.png"}
-            />
-            <StatisticCard
-              title={"Toplam Ürün"}
-              amount={"28"}
-              img={"images/product.png"}
-            />
-          </div>
-
-          <div className="flex justify-between gap-10 lg:flex-row flex-col items-center">
-            <div className="lg:w-1/2 lg:h-full h-72">
-              <Area {...config} />
-            </div>
-            <div className="lg:w-1/2 lg:h-full h-72">
-              <Pie {...config2} />
-            </div>
-          </div>
+        <StatisticCard
+          title={"Toplam Müşteri"}
+          amount={data?.length}
+          img={"images/user.png"}
+        />
+        <StatisticCard
+          title={"Toplam Kazanç"}
+          amount={totalAmount()}
+          img={"images/money.png"}
+        />
+        <StatisticCard
+          title={"Toplam Satış"}
+          amount={data?.length}
+          img={"images/sale.png"}
+        />
+        <StatisticCard
+          title={"Toplam Ürün"}
+          amount={products?.length}
+          img={"images/product.png"}
+        />
+      </div>
+      <div className="flex justify-between gap-10 lg:flex-row flex-col items-center">
+        <div className="lg:w-1/2 lg:h-full h-72">
+          <Area {...config} />
+        </div>
+        <div className="lg:w-1/2 lg:h-full h-72">
+          <Pie {...config2} />
         </div>
       </div>
     </>
