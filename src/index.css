@@ -4,21 +4,21 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Electrolize&display=swap");
 
-
 body {
   margin: 0;
-  font-family: "Electrolize", serif;
-  @apply bg-gray-100;
+  font-family: "Electrolize", sans-serif;
+  @apply bg-gray-50;
 }
 
 .ant-btn-primary {
   background-color: #1677ff;
 }
 
-.menu-link .anticon {
+.menu-link .anticon{
   display: flex;
   justify-content: center;
 }
+
 @media (min-width: 768px) {
   body {
     overflow: hidden;
@@ -27,6 +27,7 @@ body {
   .categories::-webkit-scrollbar {
     display: none;
   }
+
   .products::-webkit-scrollbar {
     display: none;
   }

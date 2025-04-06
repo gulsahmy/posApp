@@ -107,7 +107,7 @@ const PrintBill = ({ isModalOpen, setIsModalOpen, customer }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {customer?.cartItems.map((item) => (
+                {(customer?.cartItems || []).map((item) => (
                     <tr className="border-b border-slate-200">
                       <td className="py-4 sm:table-cell hidden">
                         <img
@@ -243,3 +243,4 @@ const PrintBill = ({ isModalOpen, setIsModalOpen, customer }) => {
 };
 
 export default PrintBill;
+

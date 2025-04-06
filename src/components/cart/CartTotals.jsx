@@ -133,3 +133,5 @@ const CartTotals = () => {
 };
 
 export default CartTotals;
+
+
