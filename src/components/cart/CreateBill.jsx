@@ -27,7 +27,7 @@ const CreateBill = ({ isModalOpen, setIsModalOpen }) => {
         navigate("/bills")
       }
     } catch (error) {
-      message.danger("Bir şeyler yanlış gitti!")
+      message.error("Bir şeyler yanlış gitti!")
       console.log(error);
     }
   };
